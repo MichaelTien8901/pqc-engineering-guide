@@ -43,10 +43,10 @@ flowchart TD
     A --> H{Backup KEM<br/>different family?}
     H -->|Yes| I[HQC<br/>FIPS 207]
 
-    classDef dark fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef accent fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef highlight fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
-    classDef warm fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
+    classDef dark fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef accent fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef highlight fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
+    classDef warm fill:#8e7060,stroke:#6e5040,color:#2c3e50
 
     class A dark
     class B accent

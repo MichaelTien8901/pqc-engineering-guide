@@ -31,10 +31,10 @@ flowchart TD
     AES --> FIX1[Fix: Use AES-256<br/>instead of AES-128]
     SHA --> FIX2[Fix: Use SHA-384/512<br/>or double output size]
 
-    classDef broken fill:#8b1a1a,stroke:#5a0d0d,color:#e8e0d4
-    classDef weakened fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
-    classDef fix fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef algo fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
+    classDef broken fill:#8e5050,stroke:#6e3030,color:#2c3e50
+    classDef weakened fill:#8e7060,stroke:#6e5040,color:#2c3e50
+    classDef fix fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef algo fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
 
     class SHOR,GROVER algo
     class RSA,DH,ECDSA,ECDH,DSA broken
@@ -65,8 +65,8 @@ flowchart LR
     B --> C[Quantum computer<br/>becomes available<br/>2030s?]
     C --> D[Decrypts all<br/>stored data]
 
-    classDef dark fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef broken fill:#8b1a1a,stroke:#5a0d0d,color:#e8e0d4
+    classDef dark fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef broken fill:#8e5050,stroke:#6e3030,color:#2c3e50
 
     class A,B,C dark
     class D broken
@@ -84,10 +84,10 @@ flowchart LR
     S4 --> S5[2030<br/>Recommended<br/>migration<br/>complete]
     S5 --> S6[2035<br/>Classical crypto<br/>DEPRECATED]
 
-    classDef past fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef now fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
-    classDef future fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
-    classDef deadline fill:#8b1a1a,stroke:#5a0d0d,color:#e8e0d4
+    classDef past fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef now fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
+    classDef future fill:#8e7060,stroke:#6e5040,color:#2c3e50
+    classDef deadline fill:#8e5050,stroke:#6e3030,color:#2c3e50
 
     class S1,S2 past
     class S3,S4 now

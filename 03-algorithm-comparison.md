@@ -117,10 +117,10 @@ flowchart TD
     MAX -->|KEM| HYBRID[ML-KEM-1024<br/>+ HQC-256 hybrid]
     MAX -->|Signature| SLHDSA[SLH-DSA-256f<br/>Hash-only security]
 
-    classDef start fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef question fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef answer fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
-    classDef best fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
+    classDef start fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef question fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef answer fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
+    classDef best fill:#8e7060,stroke:#6e5040,color:#2c3e50
 
     class START start
     class BW,BWKEM,SEC,STD,MAX question

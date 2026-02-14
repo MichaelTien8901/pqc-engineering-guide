@@ -79,9 +79,9 @@ flowchart TD
     SIG[Signatures<br/>Medium Priority] --> HYBRID_SIG[Deploy hybrid<br/>ECDSA + ML-DSA-65]
     DATA[Data at Rest<br/>Lower Priority] --> AES256[Ensure AES-256<br/>already quantum-safe]
 
-    classDef high fill:#8b1a1a,stroke:#5a0d0d,color:#e8e0d4
-    classDef med fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
-    classDef low fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
+    classDef high fill:#8e5050,stroke:#6e3030,color:#2c3e50
+    classDef med fill:#8e7060,stroke:#6e5040,color:#2c3e50
+    classDef low fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
 
     class KEX high
     class SIG med
@@ -189,10 +189,10 @@ flowchart TD
     Q3 -->|Yes| PLAN
     Q3 -->|No| NORMAL[Start Phase 0 by 2027<br/>Plan for 2035 deadline]
 
-    classDef urgent fill:#8b1a1a,stroke:#5a0d0d,color:#e8e0d4
-    classDef plan fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
-    classDef normal fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef question fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
+    classDef urgent fill:#8e5050,stroke:#6e3030,color:#2c3e50
+    classDef plan fill:#8e7060,stroke:#6e5040,color:#2c3e50
+    classDef normal fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef question fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
 
     class Q1,Q2,Q3 question
     class URGENT urgent

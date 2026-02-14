@@ -19,9 +19,9 @@ flowchart LR
     SIG --> SLHDSA[SLH-DSA<br/>FIPS 205]
     SIG --> FNDSA[FN-DSA<br/>FIPS 206]
 
-    classDef use fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef kem fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
-    classDef sig fill:#8b4513,stroke:#5a2d0a,color:#e8e0d4
+    classDef use fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef kem fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
+    classDef sig fill:#8e7060,stroke:#6e5040,color:#2c3e50
 
     class KE,SIG use
     class MLKEM,HQC2 kem
@@ -56,9 +56,9 @@ flowchart TD
     CODE --> HQC2[HQC]
     HASH --> SLHDSA[SLH-DSA]
 
-    classDef root fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef family fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef algo fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
+    classDef root fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef family fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef algo fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
 
     class PQC root
     class LAT,CODE,HASH family

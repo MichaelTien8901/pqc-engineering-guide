@@ -25,9 +25,9 @@ flowchart TD
     NATIVE2[circl<br/>Go native] -.-> GO
     NATIVE3[Bouncy Castle<br/>Java native] -.-> JAVA
 
-    classDef ref fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef binding fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef native fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
+    classDef ref fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef binding fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef native fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
 
     class LIBOQS ref
     class RUST,GO,PY,JAVA,NODE binding
@@ -205,9 +205,9 @@ flowchart TD
     START --> CPPQ{C/C++?}
     CPPQ -->|Yes| LIBOQS[liboqs]
 
-    classDef start fill:#2d5016,stroke:#1a3a1a,color:#e8e0d4
-    classDef lang fill:#1a3a5c,stroke:#0d2137,color:#e8e0d4
-    classDef lib fill:#6b2d5b,stroke:#4a1a4a,color:#e8e0d4
+    classDef start fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
+    classDef lang fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
+    classDef lib fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
 
     class START start
     class RUST,GOLANG,PYTHON,JAVAQ,CPPQ lang

@@ -2,7 +2,7 @@
 layout: default
 title: "PQC Algorithms"
 nav_order: 3
-description: "The 5 NIST-standardized algorithms and when to use each"
+description: "The 5 NIST-standardized algorithms, emerging tensor-based research, and when to use each"
 ---
 
 # PQC Algorithms
@@ -50,19 +50,25 @@ flowchart TD
     PQC[Post-Quantum Crypto] --> LAT[Lattice-Based<br/>3 algorithms]
     PQC --> CODE[Code-Based<br/>1 algorithm]
     PQC --> HASH[Hash-Based<br/>1 algorithm]
+    PQC -.-> TENS[Tensor-Based<br/>2 algorithms<br/>research]
     LAT --> MLKEM[ML-KEM]
     LAT --> MLDSA[ML-DSA]
     LAT --> FNDSA[FN-DSA]
     CODE --> HQC2[HQC]
     HASH --> SLHDSA[SLH-DSA]
+    TENS -.-> TKEM[Tensor-KEM]
+    TENS -.-> TSIG[Tensor-Sign]
 
     classDef root fill:#6b8e6b,stroke:#4a6a4a,color:#2c3e50
     classDef family fill:#5a8eaa,stroke:#3a6e8a,color:#2c3e50
     classDef algo fill:#8e6b8e,stroke:#6e4a6e,color:#2c3e50
+    classDef research fill:#8e8e6b,stroke:#6e6e4a,color:#2c3e50
 
     class PQC root
     class LAT,CODE,HASH family
     class MLKEM,MLDSA,FNDSA,HQC2,SLHDSA algo
+    class TENS research
+    class TKEM,TSIG research
 ```
 
 ### Family 1: Lattice-Based
@@ -142,17 +148,50 @@ flowchart TD
 
 ---
 
+### Emerging Research: Tensor-Based
+
+**The analogy**: A tensor is a multi-dimensional array — think of a Rubik's cube filled with numbers. Decomposing a tensor (expressing it as a sum of simple pieces) is provably NP-complete — meaning it's in the hardest class of problems, and no shortcut exists even for quantum computers.
+
+**The math** (simplified): Security comes from the Structured Tensor Decomposition Problem (STDP) — given a noisy tensor T = S + E over a finite field, recover the hidden low-rank tensor S. This is at least as hard as computing tensor rank, which is NP-complete (Hastad, 1990).
+
+| | |
+|---|---|
+| **Algorithms** | Tensor-KEM (KEM), Tensor-Sign (signature) |
+| **Used for** | Key exchange AND signatures (from the same math family) |
+| **Maturity** | Research stage — not standardized, limited cryptanalysis |
+
+**Pros**:
+- Strongest worst-case hardness foundation: NP-complete (tensor rank), stronger than lattice (LWE) or hash assumptions
+- Genuine cryptographic diversity — completely independent from lattice, code, and hash families
+- Both KEM and signature from the same problem family (unlike NIST standards which mix families)
+- No known quantum speedup beyond generic Grover (non-abelian symmetry blocks Shor-type attacks)
+- Compact ciphertexts (Tensor-KEM: 370 B at Level 1, competitive with ML-KEM)
+
+**Cons**:
+- **Research stage only** — not standardized, no production implementations
+- New assumption with less than 1 year of public cryptanalysis
+- Large public keys (8.5 KB - 122 KB) and very large unoptimized signatures (481 KB - 3.6 MB)
+- No worst-case-to-average-case reduction yet (hardness is conjectural for random instances)
+- Slow signing (~0.1-25 seconds depending on security level)
+
+{: .warning }
+> Tensor-based PQC is a **research contribution** developed as part of this project. It is **not ready for production use**. See the [full research specification](https://github.com/MichaelTien8901/libpqcx/tree/main/src/research/novel-candidates/tensor-based) for details.
+
+---
+
 ## Family Comparison At a Glance
 
-| Property | Lattice-Based | Code-Based | Hash-Based |
-|----------|--------------|------------|------------|
-| **Confidence level** | High | Very High | Highest |
-| **Years of analysis** | ~15 years | 45+ years | Decades (hash functions) |
-| **KEMs** | ML-KEM | HQC | None |
-| **Signatures** | ML-DSA, FN-DSA | None (standardized) | SLH-DSA |
-| **Performance** | Fastest | Moderate | Slowest (signing) |
-| **Key sizes** | Small-moderate | Moderate-large | Small keys, large sigs |
-| **Risk if family breaks** | 3 of 5 standards affected | 1 standard affected | 1 standard affected |
+| Property | Lattice-Based | Code-Based | Hash-Based | Tensor-Based |
+|----------|--------------|------------|------------|--------------|
+| **Confidence level** | High | Very High | Highest | Low (new) |
+| **Years of analysis** | ~15 years | 45+ years | Decades (hash functions) | < 1 year |
+| **KEMs** | ML-KEM | HQC | None | Tensor-KEM |
+| **Signatures** | ML-DSA, FN-DSA | None (standardized) | SLH-DSA | Tensor-Sign |
+| **Performance** | Fastest | Moderate | Slowest (signing) | Slow (research) |
+| **Key sizes** | Small-moderate | Moderate-large | Small keys, large sigs | Large keys, compact ct |
+| **Risk if family breaks** | 3 of 5 standards affected | 1 standard affected | 1 standard affected | Independent |
+| **NP-hard foundation** | No (conjectured) | Yes (syndrome decoding) | N/A (hash assumption) | Yes (tensor rank) |
+| **Status** | NIST standardized | NIST standardized | NIST standardized | Research only |
 
 ---
 
@@ -272,6 +311,51 @@ The "f" variants optimize for speed; "s" variants optimize for smaller signature
 
 ---
 
+### Tensor-KEM (Research)
+
+| | |
+|---|---|
+| **Family** | Tensor-based (STDP) |
+| **Type** | Key Encapsulation Mechanism |
+| **Use case** | Research — alternative KEM from an independent math family |
+| **Think of it as** | "NP-complete foundation KEM — strongest worst-case hardness" |
+| **Status** | Research only (not standardized) |
+
+**Parameter sets**:
+
+| Parameter | Security Level | Public Key | Ciphertext | Shared Secret |
+|-----------|---------------|------------|------------|---------------|
+| Tensor-KEM-I | Level 1 | 8,450 B | 370 B | 32 B |
+| Tensor-KEM-III | Level 3 | 26,714 B | 722 B | 32 B |
+| Tensor-KEM-V | Level 5 | 61,250 B | 1,282 B | 32 B |
+
+Note: Ciphertexts are compact (competitive with ML-KEM), but public keys are significantly larger.
+
+---
+
+### Tensor-Sign (Research)
+
+| | |
+|---|---|
+| **Family** | Tensor-based (TIP) |
+| **Type** | Digital Signature |
+| **Use case** | Research — signature from tensor isomorphism with perfect correctness |
+| **Think of it as** | "Zero-knowledge proof you know a tensor isomorphism" |
+| **Status** | Research only (not standardized) |
+
+**Parameter sets**:
+
+| Parameter | Security Level | Public Key | Signature |
+|-----------|---------------|------------|-----------|
+| Tensor-Sign-I | Level 1 | 16,900 B | ~481 KB |
+| Tensor-Sign-III | Level 3 | 53,428 B | ~1.5 MB |
+| Tensor-Sign-V | Level 5 | 122,500 B | ~3.6 MB |
+
+{: .warning }
+> Signature sizes are very large in the current unoptimized construction. MPC-in-the-Head techniques could reduce these by 10-100x in future work.
+
+---
+
 ## NIST Security Levels Explained
 
 NIST defines 5 security levels. In practice, you'll encounter Levels 1, 3, and 5:
@@ -295,6 +379,7 @@ NIST defines 5 security levels. In practice, you'll encounter Levels 1, 3, and 5
 | Signatures (default) | ML-DSA-65 | Best balance of size and speed |
 | Signatures (smallest) | FN-DSA-512 | 666 B signatures, but needs floating-point |
 | Signatures (most conservative) | SLH-DSA | Only depends on hash function security |
+| Research (NP-complete foundation) | Tensor-KEM / Tensor-Sign | Independent math family, strongest hardness — not production-ready |
 
 **Next**: See the [Algorithm Comparison]({% link 03-algorithm-comparison.md %}) for detailed engineering data (sizes, speeds, memory).
 
@@ -302,4 +387,4 @@ NIST defines 5 security levels. In practice, you'll encounter Levels 1, 3, and 5
 
 **Sources**: [FIPS 203 ML-KEM](https://csrc.nist.gov/pubs/fips/203/final) | [FIPS 204 ML-DSA](https://csrc.nist.gov/pubs/fips/204/final) | [FIPS 205 SLH-DSA](https://csrc.nist.gov/pubs/fips/205/final) | [HQC Selection](https://www.nist.gov/news-events/news/2025/03/nist-selects-hqc-fifth-algorithm-post-quantum-encryption)
 
-*Last updated: 2026-02-13*
+*Last updated: 2026-02-19*
